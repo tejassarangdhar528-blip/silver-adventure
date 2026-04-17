@@ -98,7 +98,26 @@
         <a href="#" onclick="showLoginForm(event)" class="auth-link">Back to Login</a>
     </div>
 </div>
+<script>
+// DEMO USER (fixed)
+let demoUser = {
+    email: "user@test.com",
+    password: "12345"
+};
 
+function login() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if (email === demoUser.email && password === demoUser.password) {
+        document.getElementById("msg").innerText = "Login Successful ✅";
+        document.getElementById("msg").style.color = "green";
+    } else {
+        document.getElementById("msg").innerText = "Invalid Email or Password ❌";
+        document.getElementById("msg").style.color = "red";
+    }
+}
+</script>
 
             <!-- Forgot Password Form -->
             <div id="forgotPasswordForm" class="auth-form">
