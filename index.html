@@ -102,6 +102,39 @@
 
     </head>
 <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Single User Login</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+}
+
+button {
+    padding: 10px 20px;
+}
+</style>
+
+</head>
+<body>
 
 <div class="box">
     <h2>🔐 User Login</h2>
@@ -113,52 +146,37 @@
 
     <p id="msg"></p>
 </div>
-    
-    
-    // DEMO USER (fixed)
-let demoUser = {
-    email: "user@test.com",
-    password: "12345"
-};
+
+<script>
+
+// ✅ Only ONE user allowed
+let userEmail = "admin@gmail.com";
+let userPassword = "12345";
 
 function login() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    if (email === demoUser.email && password === demoUser.password) {
+    if (email === userEmail && password === userPassword) {
         document.getElementById("msg").innerText = "Login Successful ✅";
         document.getElementById("msg").style.color = "green";
+
+        // Redirect (optional)
+        // window.location.href = "dashboard.html";
+        
     } else {
-        document.getElementById("msg").innerText = "Invalid Email or Password ❌";
+        document.getElementById("msg").innerText = "Wrong Email or Password ❌";
         document.getElementById("msg").style.color = "red";
     }
 }
+
 </script>
 
-            <!-- Forgot Password Form -->
-            <div id="forgotPasswordForm" class="auth-form">
-                <div class="login-header">
-                    <h1>🚗 Parking System</h1>
-                    <p>Reset Password</p>
-                </div>
+</body>
+</html>
 
-                <form id="forgotPasswordFormElement" class="login-form">
-                    <div class="form-group">
-                        <label>Enter your registered email:</label>
-                        <input type="email" id="resetEmail" placeholder="your@email.com" required>
-                    </div>
-                    <p style="color: #666; font-size: 13px; margin: 10px 0;">
-                        We'll send you a link to reset your password
-                    </p>
-                    <button type="submit" class="btn btn-primary">Send Reset Link</button>
-                </form>
 
-                <div style="text-align: center; margin-top: 15px;">
-                    <a href="#" onclick="showLoginForm(event)" class="auth-link">Back to Login</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Admin Dashboard -->
     <div id="adminContainer" style="display: none;">
