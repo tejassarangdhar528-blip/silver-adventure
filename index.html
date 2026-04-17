@@ -101,79 +101,44 @@
 <script>
 
     </head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Single User Login</title>
-
-<style>
-body {
-    font-family: Arial;
-    text-align: center;
-    margin-top: 100px;
-}
-
-.box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    display: inline-block;
-    border-radius: 10px;
-}
-
-input {
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-}
-
-button {
-    padding: 10px 20px;
-}
-</style>
-
-</head>
-<body>
-
-<div class="box">
-    <h2>🔐 User Login</h2>
-
-    <input type="email" id="email" placeholder="Enter Email"><br>
-    <input type="password" id="password" placeholder="Enter Password"><br>
-
-    <button onclick="login()">Login</button>
-
-    <p id="msg"></p>
-</div>
-
-<script>
-
-// ✅ Only ONE user allowed
+// ✅ Fixed Single User
 let userEmail = "admin@gmail.com";
 let userPassword = "12345";
 
-function login() {
+// LOGIN
+document.getElementById("loginFormElement").addEventListener("submit", function(e) {
+    e.preventDefault();
+
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
     if (email === userEmail && password === userPassword) {
-        document.getElementById("msg").innerText = "Login Successful ✅";
-        document.getElementById("msg").style.color = "green";
+        alert("Login Successful ✅");
 
-        // Redirect (optional)
-        // window.location.href = "dashboard.html";
-        
+        // Hide login
+        document.getElementById("loginContainer").style.display = "none";
+
+        // Show main app
+        document.getElementById("mainApp").style.display = "block";
+
+        // Show user info
+        document.getElementById("userEmailDisplay").innerText = email;
+        document.getElementById("userNameDisplay").innerText = "User";
+
     } else {
-        document.getElementById("msg").innerText = "Wrong Email or Password ❌";
-        document.getElementById("msg").style.color = "red";
+        alert("Wrong Email or Password ❌");
     }
-}
+});
 
-</script>
 
-</body>
-</html>
+// LOGOUT
+document.getElementById("logoutBtn").addEventListener("click", function() {
+    location.reload();
+});
+
+
+    
+    
 
 
 
