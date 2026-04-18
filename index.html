@@ -102,42 +102,7 @@
 
     </head>
 <script>
-let userEmail = "admin@gmail.com";
-let userPassword = "12345";
 
-// LOGIN
-document.getElementById("loginFormElement").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    if (email === userEmail && password === userPassword) {
-        alert("Login Successful ✅");
-
-        // Hide login
-        document.getElementById("loginContainer").style.display = "none";
-
-        // Show main app
-        document.getElementById("mainApp").style.display = "block";
-
-        // Show user info
-        document.getElementById("userEmailDisplay").innerText = email;
-        document.getElementById("userNameDisplay").innerText = "User";
-
-    } else {
-        alert("Wrong Email or Password ❌");
-    }
-});
-
-
-// LOGOUT
-document.getElementById("logoutBtn").addEventListener("click", function() {
-    location.reload();
-});
-
-
-</script>  
     
 
 
