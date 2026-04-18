@@ -1267,7 +1267,7 @@ document.getElementById("signupFormElement").addEventListener("submit", function
     alert("✅ Account Created Successfully!");
     showLoginForm();
 });
-
+<script >
 // =======================
 // LOGIN
 // =======================
@@ -1365,3 +1365,4 @@ function clearAllData(){
         location.reload();
     }
 }
+</script>
