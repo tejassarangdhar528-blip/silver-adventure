@@ -1187,3 +1187,181 @@ function verifyOTP() {
       alert("Invalid OTP ❌");
     });
 }
+// =======================
+// GLOBAL DATA
+// =======================
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let currentUser = null;
+
+// Default Admin
+const admin = {
+    email: "admin@parking.com",
+    password: "admin123"
+};
+
+// =======================
+// FORM SWITCHING
+// =======================
+function showSignupForm(e){
+    if(e) e.preventDefault();
+    document.getElementById("loginForm").classList.remove("active");
+    document.getElementById("signupForm").classList.add("active");
+}
+
+function showLoginForm(e){
+    if(e) e.preventDefault();
+    document.getElementById("signupForm").classList.remove("active");
+    document.getElementById("loginForm").classList.add("active");
+}
+
+// =======================
+// LOGIN MODE SWITCH
+// =======================
+let loginMode = "user";
+
+function switchLoginMode(mode){
+    loginMode = mode;
+
+    document.getElementById("userModeBtn").classList.remove("active");
+    document.getElementById("adminModeBtn").classList.remove("active");
+
+    if(mode === "user"){
+        document.getElementById("userModeBtn").classList.add("active");
+        document.getElementById("loginTitle").innerText = "User Login";
+    } else {
+        document.getElementById("adminModeBtn").classList.add("active");
+        document.getElementById("loginTitle").innerText = "Admin Login";
+    }
+}
+
+// =======================
+// SIGNUP
+// =======================
+document.getElementById("signupFormElement").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let email = document.getElementById("signupEmail").value;
+    let password = document.getElementById("signupPassword").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+
+    if(password !== confirmPassword){
+        alert("❌ Password match nahi ho raha!");
+        return;
+    }
+
+    let userExists = users.find(user => user.email === email);
+
+    if(userExists){
+        alert("⚠️ User already exists!");
+        return;
+    }
+
+    let newUser = {
+        email: email,
+        password: password
+    };
+
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("✅ Account Created Successfully!");
+    showLoginForm();
+});
+
+// =======================
+// LOGIN
+// =======================
+document.getElementById("loginFormElement").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    // ADMIN LOGIN
+    if(loginMode === "admin"){
+        if(email === admin.email && password === admin.password){
+            alert("🔐 Admin Login Successful!");
+
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("adminContainer").style.display = "block";
+        } else {
+            alert("❌ Invalid Admin Credentials!");
+        }
+        return;
+    }
+
+    // USER LOGIN
+    let validUser = users.find(user => user.email === email && user.password === password);
+
+    if(validUser){
+        currentUser = validUser;
+
+        alert("✅ Login Successful!");
+
+        document.getElementById("loginContainer").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
+
+        // Show user data
+        document.getElementById("userEmailDisplay").innerText = email;
+        document.getElementById("userNameDisplay").innerText = email.split("@")[0];
+
+    } else {
+        alert("❌ Invalid Email or Password!");
+    }
+});
+
+// =======================
+// LOGOUT
+// =======================
+document.getElementById("logoutBtn").addEventListener("click", function(){
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("loginContainer").style.display = "block";
+});
+
+document.getElementById("adminLogoutBtn").addEventListener("click", function(){
+    document.getElementById("adminContainer").style.display = "none";
+    document.getElementById("loginContainer").style.display = "block";
+});
+
+// =======================
+// SIMPLE NAVIGATION
+// =======================
+document.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", function(e){
+        e.preventDefault();
+
+        // remove active from all
+        document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+
+        // add active to clicked
+        this.classList.add("active");
+
+        let target = this.getAttribute("href").substring(1);
+        document.getElementById(target).classList.add("active");
+    });
+});
+
+// =======================
+// DUMMY FUNCTIONS (ERROR NA AAYE)
+// =======================
+function showForgotPasswordForm(e){
+    e.preventDefault();
+    alert("Forgot Password feature abhi add nahi hua.");
+}
+
+function editUserProfile(){
+    alert("Edit profile coming soon...");
+}
+
+function changePassword(){
+    alert("Change password coming soon...");
+}
+
+function clearAllData(){
+    if(confirm("Sab data delete karna hai?")){
+        localStorage.clear();
+        alert("Data cleared!");
+        location.reload();
+    }
+}
