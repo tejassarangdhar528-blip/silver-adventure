@@ -843,3 +843,26 @@ footer {
 .btn-green:hover {
     background-color: #218838;
 }
+body {
+    /* Replace 'image.png' with your actual file path */
+    background-image: url('image.png');
+
+    /* This ensures the image covers the entire screen without stretching */
+    background-size: cover;
+
+    /* Centers the image both vertically and horizontally */
+    background-position: center;
+
+    /* Prevents the image from repeating if the content is longer than the image */
+    background-repeat: no-repeat;
+
+    /* Optional: Keeps the background fixed while scrolling */
+    background-attachment: fixed;
+
+    /* Fallback color in case the image fails to load */
+    background-color: #1a1a1a;
+
+    /* Minimum height to ensure it fills the viewport */
+    min-height: 100vh;
+    margin: 0;
+}
